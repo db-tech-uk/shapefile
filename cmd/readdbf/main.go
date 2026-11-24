@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/rockwell-uk/shapefile/dbf"
+	"github.com/db-tech-uk/shapefile/dbf"
 )
 
 // Field ...

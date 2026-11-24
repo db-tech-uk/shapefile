@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/rockwell-uk/shapefile/shp"
+	"github.com/db-tech-uk/shapefile/shp"
 )
 
 func TestNextWithDBF(t *testing.T) {

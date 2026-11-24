@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/rockwell-uk/shapefile/dbf"
+	"github.com/db-tech-uk/shapefile/dbf"
 )
 
 // Option allows for options to be specified when calling NewReader.

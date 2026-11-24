@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/rockwell-uk/shapefile/dbf"
-	"github.com/rockwell-uk/shapefile/shp"
+	"github.com/db-tech-uk/shapefile/dbf"
+	"github.com/db-tech-uk/shapefile/shp"
 )
 
 // Reader provides sequential access to the records in the shapefile.

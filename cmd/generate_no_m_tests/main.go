@@ -10,7 +10,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/rockwell-uk/shapefile/shp"
+	"github.com/db-tech-uk/shapefile/shp"
 )
 
 var sources = []string{

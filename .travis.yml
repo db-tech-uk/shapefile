@@ -1,6 +1,6 @@
 language: go
 go:
-  - 1.12
+  - 1.27
   - tip
 script:
-  - go test github.com/rockwell-uk/shapefile github.com/rockwell-uk/shapefile/shp github.com/rockwell-uk/shapefile/dbf
+  - go test github.com/db-tech-uk/shapefile github.com/db-tech-uk/shapefile/shp github.com/db-tech-uk/shapefile/dbf

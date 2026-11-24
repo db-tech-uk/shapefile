@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/rockwell-uk/shapefile/dbf"
+	"github.com/db-tech-uk/shapefile/dbf"
 )
 
 func ReadShapeFile(shapeFile string) (uint32, *Reader) {

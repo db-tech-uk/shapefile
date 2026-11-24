@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/rockwell-uk/shapefile/shp"
+	"github.com/db-tech-uk/shapefile/shp"
 )
 
 // Emit ...
