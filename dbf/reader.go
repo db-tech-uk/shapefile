@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
+	"math"
 	"time"
 )
 
@@ -54,7 +55,13 @@ func readHeader(r io.Reader, h *Header) error {
 	h.NumberOfRecords = binary.LittleEndian.Uint32(buf[4:8])
 
 	hdrLen := binary.LittleEndian.Uint16(buf[8:10])
-	h.NumberOfFields = uint8((hdrLen - 33) / 32)
+
+	numFields := (int(hdrLen) - 33) / 32
+	if hdrLen < 33 || numFields > math.MaxUint8 {
+		return fmt.Errorf("invalid dbf header length: %d", hdrLen)
+	}
+
+	h.NumberOfFields = uint8(numFields)
 	h.RecordLength = binary.LittleEndian.Uint16(buf[10:12])
 
 	off := 1

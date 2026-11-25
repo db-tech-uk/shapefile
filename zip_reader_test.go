@@ -2,6 +2,7 @@ package shapefile
 
 import (
 	"archive/zip"
+	"errors"
 	"io"
 	"os"
 	"path/filepath"
@@ -20,6 +21,8 @@ type Test struct {
 }
 
 func runTestFile(t *testing.T, zr *zip.Reader, file *TestFile) {
+	t.Helper()
+
 	r, err := NewReaderFromZip(zr, file.Name)
 	if err != nil {
 		t.Fatal(err)
@@ -29,7 +32,7 @@ func runTestFile(t *testing.T, zr *zip.Reader, file *TestFile) {
 	numberOfRecords := 0
 	for i := 0; ; i++ {
 		rec, err := r.Next()
-		if err == io.EOF {
+		if errors.Is(err, io.EOF) {
 			break
 		} else if err != nil {
 			t.Fatal(err)
@@ -51,6 +54,8 @@ func runTestFile(t *testing.T, zr *zip.Reader, file *TestFile) {
 }
 
 func runTest(t *testing.T, test *Test) {
+	t.Helper()
+
 	path := filepath.Join("test_files", test.File)
 	s, err := os.Stat(path)
 	if err != nil {
@@ -75,30 +80,30 @@ func runTest(t *testing.T, test *Test) {
 
 func TestReaderFromZip(t *testing.T) {
 	tests := []*Test{
-		&Test{
+		{
 			File: "all.zip",
 			Files: []*TestFile{
-				&TestFile{
+				{
 					Name:            "pts",
 					NumberOfRecords: 8,
 					NumberOfAttrs:   23,
 				},
-				&TestFile{
+				{
 					Name:            "pgn",
 					NumberOfRecords: 1,
 					NumberOfAttrs:   7,
 				},
 			},
 		},
-		&Test{
+		{
 			File: "shp.zip",
 			Files: []*TestFile{
-				&TestFile{
+				{
 					Name:            "pts",
 					NumberOfRecords: 8,
 					NumberOfAttrs:   0,
 				},
-				&TestFile{
+				{
 					Name:            "pgn",
 					NumberOfRecords: 1,
 					NumberOfAttrs:   0,

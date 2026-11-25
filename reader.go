@@ -2,6 +2,7 @@ package shapefile
 
 import (
 	"bytes"
+	"errors"
 	"io"
 
 	"github.com/db-tech-uk/shapefile/dbf"
@@ -55,7 +56,7 @@ func (r *Reader) Next() (*Record, error) {
 	}
 
 	a, err := r.dbf.Next()
-	if err == io.EOF {
+	if errors.Is(err, io.EOF) {
 		return nil, io.ErrUnexpectedEOF
 	} else if err != nil {
 		return nil, err

@@ -19,7 +19,7 @@ const (
 	// TriangleFan indicates the part is a linked fan of triangles,
 	// where every vertex (after the first two) completes a new triangle.
 	// A new triangle is always formed byconnecting the new vertex with
-	// its immediate predecessor and thefirst vertex of the part
+	// its immediate predecessor and thefirst vertex of the part.
 	TriangleFan PartType = 1
 
 	// OuterRing indicates the part is the outer ring of a polygon.
@@ -75,9 +75,9 @@ func readMultiPatch(r io.Reader, cl int32) (*MultiPatch, error) {
 		return nil, err
 	}
 
-	min := 30 + 4*s.NumberOfParts + 12*s.NumberOfPoints
-	max := min + 8 + 4*s.NumberOfPoints
-	if cl != min && cl != max {
+	minLen := 30 + 4*s.NumberOfParts + 12*s.NumberOfPoints
+	maxLen := minLen + 8 + 4*s.NumberOfPoints
+	if cl != minLen && cl != maxLen {
 		return nil, fmt.Errorf("invalid content length for MultiPatch: %d", cl)
 	}
 
@@ -111,9 +111,9 @@ func readMultiPatch(r io.Reader, cl int32) (*MultiPatch, error) {
 	}
 
 	// MData
-	if cl == min {
-		s.MData.empty(s.NumberOfPoints)
-	} else if err := s.MData.read(r, s.NumberOfPoints); err != nil {
+	if cl == minLen {
+		s.empty(s.NumberOfPoints)
+	} else if err := s.read(r, s.NumberOfPoints); err != nil {
 		return nil, err
 	}
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -29,7 +30,7 @@ func Emit(w io.Writer, src string) error {
 
 	for {
 		s, err := sr.Next()
-		if err == io.EOF {
+		if errors.Is(err, io.EOF) {
 			return nil
 		} else if err != nil {
 			return err
@@ -39,8 +40,6 @@ func Emit(w io.Writer, src string) error {
 			return err
 		}
 	}
-
-	return nil
 }
 
 func main() {

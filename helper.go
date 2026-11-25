@@ -1,7 +1,6 @@
 package shapefile
 
 import (
-	"io/ioutil"
 	"os"
 	"strings"
 
@@ -9,7 +8,6 @@ import (
 )
 
 func ReadShapeFile(shapeFile string) (uint32, *Reader) {
-
 	// Open the shapefile for reading
 	sr, err := os.Open(shapeFile)
 	if err != nil {
@@ -31,15 +29,14 @@ func ReadShapeFile(shapeFile string) (uint32, *Reader) {
 }
 
 func ReadShapeFileToMemory(shapeFile string) (uint32, *Reader) {
-
 	// Open the shapefile for reading
-	sr, err := ioutil.ReadFile(shapeFile)
+	sr, err := os.ReadFile(shapeFile)
 	if err != nil {
 		panic(err)
 	}
 
 	// Open the dbf for reading
-	dr, err := ioutil.ReadFile(strings.Replace(shapeFile, ".shp", ".dbf", 1))
+	dr, err := os.ReadFile(strings.Replace(shapeFile, ".shp", ".dbf", 1))
 	if err != nil {
 		panic(err)
 	}
@@ -53,7 +50,6 @@ func ReadShapeFileToMemory(shapeFile string) (uint32, *Reader) {
 }
 
 func GetRecordCount(shapeFile string) uint32 {
-
 	// Open the dbf for reading the header
 	dbr, err := os.Open(strings.Replace(shapeFile, ".shp", ".dbf", 1))
 	if err != nil {

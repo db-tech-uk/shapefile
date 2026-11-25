@@ -40,9 +40,9 @@ func readPolylineM(r io.Reader, cl int32) (*PolylineM, error) {
 		return nil, err
 	}
 
-	min := 22 + 2*p.NumberOfParts + 8*p.NumberOfPoints
-	max := min + 8 + 4*p.NumberOfPoints
-	if cl != min && cl != max {
+	minLen := 22 + 2*p.NumberOfParts + 8*p.NumberOfPoints
+	maxLen := minLen + 8 + 4*p.NumberOfPoints
+	if cl != minLen && cl != maxLen {
 		return nil, fmt.Errorf("invalid content length for PolylineM: %d", cl)
 	}
 
@@ -59,9 +59,9 @@ func readPolylineM(r io.Reader, cl int32) (*PolylineM, error) {
 	}
 
 	// MData
-	if cl == min {
-		p.MData.empty(p.NumberOfPoints)
-	} else if err := p.MData.read(r, p.NumberOfPoints); err != nil {
+	if cl == minLen {
+		p.empty(p.NumberOfPoints)
+	} else if err := p.read(r, p.NumberOfPoints); err != nil {
 		return nil, err
 	}
 

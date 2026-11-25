@@ -38,11 +38,11 @@ func TestPolylineM(t *testing.T) {
 				NumberOfPoints: 5,
 				Parts:          []int32{0, 3},
 				Points: []Point{
-					Point{12, 56},
-					Point{70, 90},
-					Point{0, 0},
-					Point{45, 6},
-					Point{89.3, 12.2},
+					{12, 56},
+					{70, 90},
+					{0, 0},
+					{45, 6},
+					{89.3, 12.2},
 				},
 				MData: MData{
 					MRange: Range{10, 12},
@@ -66,8 +66,8 @@ func TestPolylineM(t *testing.T) {
 				NumberOfPoints: 2,
 				Parts:          []int32{0},
 				Points: []Point{
-					Point{0, 0},
-					Point{42.42, 66.66},
+					{0, 0},
+					{42.42, 66.66},
 				},
 				MData: MData{
 					MRange: Range{4, 5},
@@ -102,11 +102,11 @@ func TestPolylineMOptionalM(t *testing.T) {
 				NumberOfPoints: 5,
 				Parts:          []int32{0, 3},
 				Points: []Point{
-					Point{12, 56},
-					Point{70, 90},
-					Point{0, 0},
-					Point{45, 6},
-					Point{89.3, 12.2},
+					{12, 56},
+					{70, 90},
+					{0, 0},
+					{45, 6},
+					{89.3, 12.2},
 				},
 				MData: MData{
 					MRange: Range{math.NaN(), math.NaN()},
@@ -130,8 +130,8 @@ func TestPolylineMOptionalM(t *testing.T) {
 				NumberOfPoints: 2,
 				Parts:          []int32{0},
 				Points: []Point{
-					Point{0, 0},
-					Point{42.42, 66.66},
+					{0, 0},
+					{42.42, 66.66},
 				},
 				MData: MData{
 					MRange: Range{math.NaN(), math.NaN()},

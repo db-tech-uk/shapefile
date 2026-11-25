@@ -33,10 +33,10 @@ func readMultiPointM(r io.Reader, cl int32) (*MultiPointM, error) {
 		return nil, err
 	}
 
-	min := 20 + mp.NumberOfPoints*8
-	max := min + 8 + mp.NumberOfPoints*4
+	minLen := 20 + mp.NumberOfPoints*8
+	maxLen := minLen + 8 + mp.NumberOfPoints*4
 
-	if cl != min && cl != max {
+	if cl != minLen && cl != maxLen {
 		return nil, fmt.Errorf("invalid content length for MultiPointM: %d", cl)
 	}
 
@@ -47,9 +47,9 @@ func readMultiPointM(r io.Reader, cl int32) (*MultiPointM, error) {
 	}
 
 	// MData
-	if cl == min {
-		mp.MData.empty(mp.NumberOfPoints)
-	} else if err := mp.MData.read(r, mp.NumberOfPoints); err != nil {
+	if cl == minLen {
+		mp.empty(mp.NumberOfPoints)
+	} else if err := mp.read(r, mp.NumberOfPoints); err != nil {
 		return nil, err
 	}
 

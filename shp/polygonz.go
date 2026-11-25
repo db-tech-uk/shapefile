@@ -43,9 +43,9 @@ func readPolygonZ(r io.Reader, cl int32) (*PolygonZ, error) {
 		return nil, err
 	}
 
-	min := 30 + 2*s.NumberOfParts + 12*s.NumberOfPoints
-	max := min + 8 + 4*s.NumberOfPoints
-	if cl != min && cl != max {
+	minLen := 30 + 2*s.NumberOfParts + 12*s.NumberOfPoints
+	maxLen := minLen + 8 + 4*s.NumberOfPoints
+	if cl != minLen && cl != maxLen {
 		return nil, fmt.Errorf("invalid content length for PolygonZ: %d", cl)
 	}
 
@@ -73,9 +73,9 @@ func readPolygonZ(r io.Reader, cl int32) (*PolygonZ, error) {
 	}
 
 	// MData
-	if cl == min {
-		s.MData.empty(s.NumberOfPoints)
-	} else if err := s.MData.read(r, s.NumberOfPoints); err != nil {
+	if cl == minLen {
+		s.empty(s.NumberOfPoints)
+	} else if err := s.read(r, s.NumberOfPoints); err != nil {
 		return nil, err
 	}
 

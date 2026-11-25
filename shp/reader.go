@@ -76,13 +76,13 @@ func readHeader(r io.Reader, hdr *Header) error {
 }
 
 // Next ...
-func (r *Reader) Next() (Shape, error) {
+func (r *Reader) Next() (Shape, error) { //nolint:ireturn // callers type-switch on the concrete shape
 	if _, err := readInteger(r.r, binary.BigEndian); err != nil {
 		return nil, err
 	}
 
 	cl, err := readInteger(r.r, binary.BigEndian)
-	if err == io.EOF {
+	if errors.Is(err, io.EOF) {
 		return nil, io.ErrUnexpectedEOF
 	} else if err != nil {
 		return nil, err
@@ -95,7 +95,7 @@ func (r *Reader) Next() (Shape, error) {
 
 	switch st {
 	case TypeNull:
-		return readNull(r.r, cl)
+		return readNull(cl)
 	case TypePoint:
 		return readPoint(r.r, cl)
 	case TypeMultiPoint:

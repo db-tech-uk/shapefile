@@ -2,6 +2,7 @@ package shp
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"math"
 	"os"
@@ -235,6 +236,8 @@ func allShapesAreSame(a, b []Shape) bool {
 func expectIn(t *testing.T,
 	filename string,
 	exp *Expected) {
+	t.Helper()
+
 	r, err := os.Open(filename + ".shp")
 	if err != nil {
 		t.Fatal(err)
@@ -255,7 +258,7 @@ func expectIn(t *testing.T,
 	var shapes []Shape
 	for {
 		s, err := sr.Next()
-		if err == io.EOF {
+		if errors.Is(err, io.EOF) {
 			break
 		} else if err != nil {
 			t.Fatal(err)

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -26,10 +27,10 @@ var sources = []string{
 func sizeOfMData(st shp.ShapeType, rec []byte) int32 {
 	switch st {
 	case shp.TypeMultiPointM, shp.TypeMultiPointZ:
-		numPoints := int32(binary.LittleEndian.Uint32(rec[36:40]))
+		numPoints := int32(binary.LittleEndian.Uint32(rec[36:40])) //nolint:gosec // shapefile stores this as a signed 32-bit int
 		return 8 + numPoints*4
 	case shp.TypePolylineM, shp.TypePolylineZ, shp.TypePolygonM, shp.TypePolygonZ, shp.TypeMultiPatch:
-		numPoints := int32(binary.LittleEndian.Uint32(rec[40:44]))
+		numPoints := int32(binary.LittleEndian.Uint32(rec[40:44])) //nolint:gosec // shapefile stores this as a signed 32-bit int
 		return 8 + numPoints*4
 	}
 	return 0
@@ -98,7 +99,7 @@ func rewriteSHP(src, dst string) error {
 	var buf bytes.Buffer
 	for {
 		var num int32
-		if err := binary.Read(r, binary.BigEndian, &num); err == io.EOF {
+		if err := binary.Read(r, binary.BigEndian, &num); errors.Is(err, io.EOF) {
 			break
 		} else if err != nil {
 			return err
@@ -114,10 +115,10 @@ func rewriteSHP(src, dst string) error {
 			return err
 		}
 
-		st := shp.ShapeType(int32(binary.LittleEndian.Uint32(rec[:4])))
+		st := shp.ShapeType(int32(binary.LittleEndian.Uint32(rec[:4]))) //nolint:gosec // shapefile stores this as a signed 32-bit int
 
 		ml := sizeOfMData(st, rec)
-		sr.Header.FileLength -= ml
+		sr.FileLength -= ml
 
 		if err := binary.Write(&buf, binary.BigEndian, num); err != nil {
 			return err

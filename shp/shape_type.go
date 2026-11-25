@@ -4,46 +4,46 @@ package shp
 type ShapeType int32
 
 const (
-	// TypeNull indicates Null
+	// TypeNull indicates Null.
 	TypeNull = 0
 
-	// TypePoint indicates Point
+	// TypePoint indicates Point.
 	TypePoint = 1
 
-	// TypePolyline indicates Polyline
+	// TypePolyline indicates Polyline.
 	TypePolyline = 3
 
-	// TypePolygon indicates Polygon
+	// TypePolygon indicates Polygon.
 	TypePolygon = 5
 
-	// TypeMultiPoint indicates MultiPoint
+	// TypeMultiPoint indicates MultiPoint.
 	TypeMultiPoint = 8
 
-	// TypePointZ indicates PointZ
+	// TypePointZ indicates PointZ.
 	TypePointZ = 11
 
-	// TypePolylineZ indicates PolylineZ
+	// TypePolylineZ indicates PolylineZ.
 	TypePolylineZ = 13
 
-	// TypePolygonZ indicates PolygonZ
+	// TypePolygonZ indicates PolygonZ.
 	TypePolygonZ = 15
 
-	// TypeMultiPointZ indicates MultiPointZ
+	// TypeMultiPointZ indicates MultiPointZ.
 	TypeMultiPointZ = 18
 
-	// TypePointM indicates PointM
+	// TypePointM indicates PointM.
 	TypePointM = 21
 
-	// TypePolylineM indicates PolylineM
+	// TypePolylineM indicates PolylineM.
 	TypePolylineM = 23
 
-	// TypePolygonM indicates PolygonM
+	// TypePolygonM indicates PolygonM.
 	TypePolygonM = 25
 
-	// TypeMultiPointM indicates MultiPointM
+	// TypeMultiPointM indicates MultiPointM.
 	TypeMultiPointM = 28
 
-	// TypeMultiPatch indicates MultiPatch
+	// TypeMultiPatch indicates MultiPatch.
 	TypeMultiPatch = 31
 )
 

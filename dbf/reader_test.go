@@ -2,6 +2,7 @@ package dbf
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -17,7 +18,7 @@ type Test struct {
 
 var tests = []*Test{
 	// test_files/null
-	&Test{
+	{
 		Name: "null",
 		Header: Header{
 			Day:             time.Date(2019, 8, 4, 0, 0, 0, 0, time.UTC),
@@ -25,37 +26,37 @@ var tests = []*Test{
 			NumberOfFields:  6,
 			RecordLength:    170,
 			Fields: []*Field{
-				&Field{
+				{
 					Name:         "NAME",
 					Type:         TypeCharacter,
 					Length:       10,
 					DecimalCount: 0,
 				},
-				&Field{
+				{
 					Name:         "CHAR",
 					Type:         TypeCharacter,
 					Length:       50,
 					DecimalCount: 0,
 				},
-				&Field{
+				{
 					Name:         "DATE",
 					Type:         TypeDate,
 					Length:       8,
 					DecimalCount: 0,
 				},
-				&Field{
+				{
 					Name:         "VALF",
 					Type:         TypeFloat,
 					Length:       50,
 					DecimalCount: 4,
 				},
-				&Field{
+				{
 					Name:         "VALL",
 					Type:         TypeLogical,
 					Length:       1,
 					DecimalCount: 0,
 				},
-				&Field{
+				{
 					Name:         "VALN",
 					Type:         TypeNumeric,
 					Length:       50,
@@ -70,7 +71,7 @@ var tests = []*Test{
 	},
 
 	// test_files/point
-	&Test{
+	{
 		Name: "point",
 		Header: Header{
 			Day:             time.Date(2019, 8, 4, 0, 0, 0, 0, time.UTC),
@@ -78,37 +79,37 @@ var tests = []*Test{
 			NumberOfFields:  6,
 			RecordLength:    170,
 			Fields: []*Field{
-				&Field{
+				{
 					Name:         "NAME",
 					Type:         TypeCharacter,
 					Length:       10,
 					DecimalCount: 0,
 				},
-				&Field{
+				{
 					Name:         "CHAR",
 					Type:         TypeCharacter,
 					Length:       50,
 					DecimalCount: 0,
 				},
-				&Field{
+				{
 					Name:         "DATE",
 					Type:         TypeDate,
 					Length:       8,
 					DecimalCount: 0,
 				},
-				&Field{
+				{
 					Name:         "VALF",
 					Type:         TypeFloat,
 					Length:       50,
 					DecimalCount: 4,
 				},
-				&Field{
+				{
 					Name:         "VALL",
 					Type:         TypeLogical,
 					Length:       1,
 					DecimalCount: 0,
 				},
-				&Field{
+				{
 					Name:         "VALN",
 					Type:         TypeNumeric,
 					Length:       50,
@@ -123,7 +124,7 @@ var tests = []*Test{
 	},
 
 	// test_files/multipoint
-	&Test{
+	{
 		Name: "multipoint",
 		Header: Header{
 			Day:             time.Date(2019, 8, 4, 0, 0, 0, 0, time.UTC),
@@ -131,7 +132,7 @@ var tests = []*Test{
 			NumberOfFields:  1,
 			RecordLength:    255,
 			Fields: []*Field{
-				&Field{
+				{
 					Name:         "DATA",
 					Type:         TypeCharacter,
 					Length:       254,
@@ -204,6 +205,8 @@ func toJSON(data interface{}) []byte {
 }
 
 func runTest(t *testing.T, test *Test) {
+	t.Helper()
+
 	r, err := os.Open(fmt.Sprintf("../test_files/%s.dbf", test.Name))
 	if err != nil {
 		t.Fatal(err)
@@ -225,7 +228,7 @@ func runTest(t *testing.T, test *Test) {
 	var attrs [][]string
 	for {
 		r, err := dbf.Next()
-		if err == io.EOF {
+		if errors.Is(err, io.EOF) {
 			break
 		} else if err != nil {
 			t.Fatal(err)

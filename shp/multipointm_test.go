@@ -24,9 +24,9 @@ func TestMultiPointM(t *testing.T) {
 				BBox:           BBox{0, 0, 3, 5},
 				NumberOfPoints: 3,
 				Points: []Point{
-					Point{0, 0},
-					Point{1, 2},
-					Point{3, 5},
+					{0, 0},
+					{1, 2},
+					{3, 5},
 				},
 				MData: MData{
 					MRange: Range{4, 8},
@@ -37,7 +37,7 @@ func TestMultiPointM(t *testing.T) {
 				BBox:           BBox{0, 1, 0, 1},
 				NumberOfPoints: 1,
 				Points: []Point{
-					Point{0, 1},
+					{0, 1},
 				},
 				MData: MData{
 					MRange: Range{100, 100},
@@ -60,9 +60,9 @@ func TestMultiPointMOptionalM(t *testing.T) {
 				BBox:           BBox{0, 0, 3, 5},
 				NumberOfPoints: 3,
 				Points: []Point{
-					Point{0, 0},
-					Point{1, 2},
-					Point{3, 5},
+					{0, 0},
+					{1, 2},
+					{3, 5},
 				},
 				MData: MData{
 					MRange: Range{math.NaN(), math.NaN()},
@@ -73,7 +73,7 @@ func TestMultiPointMOptionalM(t *testing.T) {
 				BBox:           BBox{0, 1, 0, 1},
 				NumberOfPoints: 1,
 				Points: []Point{
-					Point{0, 1},
+					{0, 1},
 				},
 				MData: MData{
 					MRange: Range{math.NaN(), math.NaN()},

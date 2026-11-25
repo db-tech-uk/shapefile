@@ -1,6 +1,7 @@
 package shapefile
 
 import (
+	"errors"
 	"io"
 	"os"
 	"testing"
@@ -54,7 +55,7 @@ func TestNextWithDBF(t *testing.T) {
 		}
 	}
 
-	if _, err = r.Next(); err != io.EOF {
+	if _, err = r.Next(); !errors.Is(err, io.EOF) {
 		t.Fatalf("expected EOF but got %s", err)
 	}
 }
@@ -99,7 +100,7 @@ func TestNextWithoutDBF(t *testing.T) {
 		}
 	}
 
-	if _, err = r.Next(); err != io.EOF {
+	if _, err = r.Next(); !errors.Is(err, io.EOF) {
 		t.Fatalf("expected EOF but got %s", err)
 	}
 }
@@ -130,7 +131,7 @@ func TestNextUnexpectedEOF(t *testing.T) {
 		}
 	}
 
-	if _, err := r.Next(); err != io.ErrUnexpectedEOF {
+	if _, err := r.Next(); !errors.Is(err, io.ErrUnexpectedEOF) {
 		t.Fatalf("expected ErrUnexpectedEOF got %s", err)
 	}
 }

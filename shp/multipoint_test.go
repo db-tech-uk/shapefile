@@ -25,10 +25,10 @@ func TestMultiPoint(t *testing.T) {
 				},
 				NumberOfPoints: 4,
 				Points: []Point{
-					Point{0, 0},
-					Point{10, 10},
-					Point{20, 10},
-					Point{5, 5},
+					{0, 0},
+					{10, 10},
+					{20, 10},
+					{5, 5},
 				},
 			},
 			&MultiPoint{
@@ -40,8 +40,8 @@ func TestMultiPoint(t *testing.T) {
 				},
 				NumberOfPoints: 2,
 				Points: []Point{
-					Point{0, 0},
-					Point{4, 5},
+					{0, 0},
+					{4, 5},
 				},
 			},
 		},

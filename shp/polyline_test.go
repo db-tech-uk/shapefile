@@ -34,11 +34,11 @@ func TestPolyline(t *testing.T) {
 				NumberOfPoints: 5,
 				Parts:          []int32{0, 3},
 				Points: []Point{
-					Point{12, 56},
-					Point{70, 90},
-					Point{0, 0},
-					Point{45, 6},
-					Point{89.3, 12.2},
+					{12, 56},
+					{70, 90},
+					{0, 0},
+					{45, 6},
+					{89.3, 12.2},
 				},
 			},
 			&Polyline{
@@ -52,8 +52,8 @@ func TestPolyline(t *testing.T) {
 				NumberOfPoints: 2,
 				Parts:          []int32{0},
 				Points: []Point{
-					Point{0, 0},
-					Point{42.42, 66.66},
+					{0, 0},
+					{42.42, 66.66},
 				},
 			},
 		},
